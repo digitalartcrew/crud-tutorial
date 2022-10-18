@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const db = require("./db");
+const { DestinationRoutes } = require("./routes");
 
 app.get("/", (req, res) => {
   db.collection("destinations")
@@ -10,5 +11,7 @@ app.get("/", (req, res) => {
     .then((results) => res.send(results))
     .catch((e) => console.error("We have an error: ", e));
 });
+
+app.use("/api", DestinationRoutes);
 
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
